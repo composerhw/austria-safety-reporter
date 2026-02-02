@@ -74,16 +74,10 @@ def main():
         return
 
     # 3. Generate Static Website (Priority)
-    try:
-        print("Generating Static Website...")
-        web_gen = WebGenerator()
-        # Ensure we pass the processed news. Even if empty, we might want to regen site (date update)
-        # But generate_site handles merging.
-        web_gen.generate_site(processed_news)
-        
-    except Exception as e:
-        print(f"Critical Error in Web Generator: {e}")
-        # Build invalid, but we continue to PDF if local
+    print("Generating Static Website...")
+    web_gen = WebGenerator()
+    web_gen.generate_site(processed_news)
+
 
     # 4. Generate PDF (Optional / Local only)
     if processed_news:
