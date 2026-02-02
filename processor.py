@@ -182,7 +182,7 @@ class NewsProcessor:
                     'original_title': original_title,
                     'title_ko': title_ko,
                     'link': item['link'],
-                    'published': item['published'],
+                    'published': item['published'].strftime('%Y-%m-%d %H:%M:%S') if isinstance(item['published'], datetime) else str(item['published']),
                     'source': source_name,
                     'summary_ko': summary_ko,
                     'keyword': item['keyword']
