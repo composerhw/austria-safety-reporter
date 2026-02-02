@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아카이브 | 오스트리아 안전 뉴스</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/simple-jekyll-search/1.10.0/simple-jekyll-search.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>🇦🇹 안전 뉴스 아카이브</h1>
+            <div class="nav">
+                <a href="index.html">홈</a>
+                <a href="archive.html" class="active">아카이브</a>
+                <a href="search.html">검색</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="card-grid">
+            {% for item in news_items %}
+            <article class="card">
+                <div class="meta">
+                    <span class="source">{{ item.source }}</span>
+                    <span>{{ item.fetched_at[:10] if item.fetched_at else item.published }}</span>
+                </div>
+                <h2>{{ item.title_ko }}</h2>
+                <div class="summary">{{ item.summary_ko[:150] }}...</div>
+                <div class="actions">
+                    <a href="{{ item.link }}" target="_blank" class="btn-read">원문 보기</a>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; {{ current_year }} Austria Safety Reporter</p>
+        </div>
+    </footer>
+</body>
+
+</html>

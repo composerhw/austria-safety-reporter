@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>검색 | 오스트리아 안전 뉴스</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>🔍 뉴스 검색</h1>
+            <div class="nav">
+                <a href="index.html">홈</a>
+                <a href="archive.html">아카이브</a>
+                <a href="search.html" class="active">검색</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <input type="text" id="searchInput" class="search-box" placeholder="검색어를 입력하세요 (예: 비엔나, 시위, 날씨)...">
+
+        <div id="searchResults" class="card-grid">
+            <!-- Results will appear here -->
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; {{ current_year }} Austria Safety Reporter</p>
+        </div>
+    </footer>
+
+    <script>
+        let archiveData = [];
+
+        // Load archive data on page load
+        fetch('data/archive.json')
+            .then(response => response.json())
+            .then(data => {
+                archiveData = data;
+                console.log('Loaded ' + archiveData.length + ' articles');
+            })
+            .catch(error => console.error('Error loading archive:', error));
+
+        const searchInput = document.getElementById('searchInput');
+        const resultsDiv = document.getElementById('searchResults');
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+
+            if (query.length < 2) {
+                resultsDiv.innerHTML = '<p style="text-align:center; color:#888;">2글자 이상 입력해주세요.</p>';
+                return;
+            }
+
+            const results = archiveData.filter(item => {
+                const title = (item.title_ko || '').toLowerCase();
+                const summary = (item.summary_ko || '').toLowerCase();
+                const source = (item.source || '').toLowerCase();
+                return title.includes(query) || summary.includes(query) || source.includes(query);
+            });
+
+            displayResults(results);
+        });
+
+        function displayResults(results) {
+            if (results.length === 0) {
+                resultsDiv.innerHTML = '<p style="text-align:center;">검색 결과가 없습니다.</p>';
+                return;
+            }
+
+            resultsDiv.innerHTML = results.map(item => `
+                <article class="card">
+                    <div class="meta">
+                        <span class="source">${item.source}</span>
+                        <span>${item.published}</span>
+                    </div>
+                    <h2>${item.title_ko}</h2>
+                    <div class="summary">${item.summary_ko}</div>
+                    <div class="actions">
+                        <a href="${item.link}" target="_blank" class="btn-read">원문 보기</a>
+                    </div>
+                </article>
+            `).join('');
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,192 @@
+:root {
+    --primary-color: #D32F2F; /* Austria Red */
+    --secondary-color: #B71C1C;
+    --text-color: #2c3e50;
+    --text-light: #607d8b;
+    --bg-color: #f5f7fa;
+    --card-bg: #ffffff;
+    --border-radius: 16px;
+    --shadow-sm: 0 4px 6px rgba(0,0,0,0.05);
+    --shadow-md: 0 10px 20px rgba(0,0,0,0.08);
+    --font-heading: 'Noto Sans KR', sans-serif;
+    --font-body: 'Noto Sans KR', sans-serif;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+header {
+    background: linear-gradient(135deg, #2b32b2 0%, #1488cc 100%);
+    /* Use Austria flag colors or just a nice safety blue/red? User is Korean Embassy related.
+       Actually, safety is often associated with Red/Orange or Blue (Police).
+       Let's stick to a professional dark theme or Red.
+       Austria Flag is Red-White-Red. */
+    background: linear-gradient(135deg, #b31217 0%, #e52d27 100%);
+    color: white;
+    padding: 60px 0 40px;
+    text-align: center;
+    border-radius: 0 0 30px 30px;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 40px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+header .date {
+    margin-top: 10px;
+    font-size: 1rem;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+/* Navigation */
+.nav {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.2);
+    transition: all 0.2s ease;
+    backdrop-filter: blur(5px);
+}
+
+.nav a:hover, .nav a.active {
+    background: white;
+    color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+/* Cards */
+.card-grid {
+    display: grid;
+    gap: 20px;
+}
+
+.card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid rgba(0,0,0,0.02);
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.card .meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-bottom: 12px;
+}
+
+.card .source {
+    font-weight: 600;
+    color: var(--primary-color);
+    background: rgba(211, 47, 47, 0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.card h2 {
+    font-size: 1.4rem;
+    margin: 0 0 12px;
+    color: #1a1a1a;
+    line-height: 1.4;
+    font-weight: 700;
+}
+
+.card .summary {
+    color: #37474f;
+    font-size: 1.05rem;
+    margin-bottom: 20px;
+}
+
+.card .actions {
+    margin-top: auto;
+    text-align: right;
+}
+
+.btn-read {
+    display: inline-block;
+    padding: 8px 20px;
+    background-color: var(--text-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.btn-read:hover {
+    background-color: black;
+}
+
+/* Archive & Search */
+.search-box {
+    width: 100%;
+    padding: 15px 20px;
+    font-size: 1.1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    transition: border-color 0.2s;
+    font-family: inherit;
+}
+
+.search-box:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.archive-list .card {
+    margin-bottom: 15px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 60px 0;
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    header { padding: 40px 0 30px; }
+    header h1 { font-size: 1.8rem; }
+    .card { padding: 20px; }
+    .card h2 { font-size: 1.25rem; }
+}
